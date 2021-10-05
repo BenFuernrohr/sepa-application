@@ -23,8 +23,8 @@ public class SepaDebitFileCreator {
 
     private final SEPABankAccount receiver;
     
-    public SepaDebitFileCreator(String creditorID, String creditorIban, String creditorBIC, String creditorName) {
-        this.receiver = new SEPABankAccount(creditorIban, creditorBIC, creditorName);
+    public SepaDebitFileCreator(String creditorID, String creditorIban, String creditorName) {
+        this.receiver = new SEPABankAccount(creditorIban, creditorName);
         this.creditorID = creditorID;
     }
     
@@ -44,7 +44,7 @@ public class SepaDebitFileCreator {
                 "Überweisung")); //TODO: what is remittance?
         }
 
-    final SEPA sepa = new SEPADirectDebit(receiver, transactions, creditorID);
-    FileUtils.writeStringToFile(new File(filename), sepa.toString(), Charset.defaultCharset());
+	    final SEPA sepa = new SEPADirectDebit(receiver, transactions, creditorID);
+	    FileUtils.writeStringToFile(new File(filename), sepa.toString(), Charset.defaultCharset());
     }
 }
